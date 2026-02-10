@@ -1,38 +1,88 @@
-const X: u32 = 5;
+mod calculator;
 
-fn shadowing() {
-    let x = 5;
-    let x = 5 + 4;
-    let x = x * 3;
-    println!("{}", x);
-}
+use std::io::{self, Write};
 
 fn main() {
-    let mut name = "John";
-    println!("Hello, world! {}", X);
-    println!("{}", name);
+    println!("Welcome to the Calculator CLI!");
+    println!("Available operations: add, subtract, multiply, divide, sqrt");
+    println!("Format: <operation> <num1> [num2]");
+    println!("Example: add 5 3");
+    println!("Type 'exit' to quit.");
 
-    // let y = x + 23;
-    // X = 23;
-    name = "Jane";
-    println!("{}", name);
-    println!(" ------ {}", X);
+    loop {
+        print!("> ");
+        io::stdout().flush().unwrap();
 
-    // shadowing();
-    let name = String::from("martin");
-    // user_name(name);
-    // user_name("Chris".to_string());
-    // user_name("Emma".to_string());
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).unwrap();
+        let input = input.trim();
 
-    // sub(20, 10);
+        if input == "exit" {
+            break;
+        }
 
-    // user("Mark", 23, "mark@gmail.co".to_string(), true);
+        let parts: Vec<&str> = input.split_whitespace().collect();
+        if parts.len() < 2 {
+            println!("Invalid input. Please enter operation and numbers.");
+            continue;
+        }
 
-    // conditionals();
-
-    school_conditionals();
-    loops();
-    while_loop();
+        let op = parts[0];
+        match op {
+            "add" | "subtract" | "multiply" | "divide" => {
+                if parts.len() != 3 {
+                    println!("Invalid input. Need two numbers for {}", op);
+                    continue;
+                }
+                let a: f64 = match parts[1].parse() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        println!("Invalid number: {}", parts[1]);
+                        continue;
+                    }
+                };
+                let b: f64 = match parts[2].parse() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        println!("Invalid number: {}", parts[2]);
+                        continue;
+                    }
+                };
+                let result = match op {
+                    "add" => calculator::add(a, b),
+                    "subtract" => calculator::subtract(a, b),
+                    "multiply" => calculator::multiply(a, b),
+                    "divide" => match calculator::divide(a, b) {
+                        Ok(res) => res,
+                        Err(e) => {
+                            println!("{}", e);
+                            continue;
+                        }
+                    },
+                    _ => unreachable!(),
+                };
+                println!("Result: {}", result);
+            }
+            "sqrt" => {
+                if parts.len() != 2 {
+                    println!("Invalid input. Need one number for sqrt");
+                    continue;
+                }
+                let a: f64 = match parts[1].parse() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        println!("Invalid number: {}", parts[1]);
+                        continue;
+                    }
+                };
+                match calculator::square_root(a) {
+                    Ok(res) => println!("Result: {}", res),
+                    Err(e) => println!("{}", e),
+                }
+            }
+            _ => println!("Unknown operation: {}", op),
+        }
+    }
 }
 
 fn user_name(name: String) {
