@@ -1,4 +1,4 @@
-mod xoulomon_calculator;
+mod calculator;
 
 const X: u32 = 5;
 
