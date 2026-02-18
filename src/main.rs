@@ -1,6 +1,8 @@
+mod wallet
 mod grouping;
 
 use grouping::group;
+
 const X: u32 = 5;
 
 fn shadowing() {
@@ -37,6 +39,8 @@ fn main() {
     // school_conditionals();
     // loops();
     // while_loop();
+    wallet::run();
+    group();
 }
 
 fn user_name(name: String) {
