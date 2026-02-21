@@ -1,4 +1,5 @@
 mod grouping;
+mod Assignments;
 mod error_handling;
 mod file_system;
 use file_system::main as file_system;
@@ -64,32 +65,32 @@ fn main() {
         }
 
     }
-    // group();
-    // let mut name = "John";
-    // println!("Hello, world! {}", X);
-    // println!("{}", name);
+    group();
+    let mut name = "John";
+    println!("Hello, world! {}", X);
+    println!("{}", name);
 
-    // // let y = x + 23;
-    // // X = 23;
-    // name = "Jane";
-    // println!("{}", name);
-    // println!(" ------ {}", X);
+    // let y = x + 23;
+    // X = 23;
+    name = "Jane";
+    println!("{}", name);
+    println!(" ------ {}", X);
 
-    // // shadowing();
-    // let name = String::from("martin");
-    // // user_name(name);
-    // // user_name("Chris".to_string());
-    // // user_name("Emma".to_string());
+    // shadowing();
+    let name = String::from("martin");
+    // user_name(name);
+    // user_name("Chris".to_string());
+    // user_name("Emma".to_string());
 
-    // // sub(20, 10);
+    // sub(20, 10);
 
-    // // user("Mark", 23, "mark@gmail.co".to_string(), true);
+    // user("Mark", 23, "mark@gmail.co".to_string(), true);
 
-    // // conditionals();
+    // conditionals();
 
-    // school_conditionals();
-    // loops();
-    // while_loop();
+    school_conditionals();
+    loops();
+    while_loop();
 }
 
 fn user_name(name: String) {
