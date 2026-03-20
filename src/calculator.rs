@@ -71,6 +71,7 @@ fn calculate(a: f64, b: f64, operator: &str) -> Option<f64> {
     match operator {
         "+" => Some(a + b),
         "-" => Some(a - b),
+        "%" => Some(a % b),
         "*" => Some(a * b),
         "/" => {
             if b == 0.0 {
