@@ -23,6 +23,7 @@ fn main() {
         "+" => num1 + num2,
         "*" => num1 * num2,
         "-" => num1 - num2,
+        "%" => num1 % num2,
         "/" => num1 / num2,
         _ => panic!("Invalid operator"),
     };
